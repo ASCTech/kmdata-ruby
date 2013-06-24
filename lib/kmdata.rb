@@ -1,7 +1,7 @@
 require "kmdata/version"
-require 'net/http'
-require 'json'
-require 'ostruct'
+require "net/http"
+require "json"
+require "ostruct"
 
 module KMData
   class << self
@@ -58,7 +58,7 @@ module KMData
     end
 
     def path_with_params(path, params)
-      [path, URI.encode_www_form(params)].join('?')
+      [path, URI.encode_www_form(params)].join("?")
     end
 
   end
