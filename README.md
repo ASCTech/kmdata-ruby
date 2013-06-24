@@ -19,9 +19,13 @@ Or install it yourself as:
 ## Usage
 
     terms = KMData.get('terms')
-
     terms.each do |term|
       puts term.description
+    end
+
+    people = KMData.get('people', { q: 'Decot' })
+    people.each do |person|
+      puts person.display_name
     end
 
 ## Contributing
