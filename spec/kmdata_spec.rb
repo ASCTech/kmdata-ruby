@@ -17,7 +17,7 @@ describe KMData do
 
   describe 'http' do
     it 'returns a Net::HTTP object' do
-      KMData.http.should be_an_instance_of(Net::HTTP)
+      KMData.send(:http).should be_an_instance_of(Net::HTTP)
     end
   end
 
