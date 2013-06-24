@@ -21,8 +21,8 @@ describe KMData do
     end
   end
 
-  describe 'http' do
-    it 'returns a Net::HTTP object' do
+  describe 'fetch' do
+    it 'returns a Net::HTTPResponse object' do
       response = Net::HTTPResponse.new '', '', ''
       Net::HTTP.any_instance.stub(:request).with(anything).and_return(response)
       KMData.send(:fetch, '/api/terms.json').should be_an_instance_of(response.class)
