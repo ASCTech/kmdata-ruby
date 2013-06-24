@@ -13,7 +13,7 @@ module KMData
       response = http.request(Net::HTTP::Get.new(path))
       process(JSON.parse(response.body))
     rescue Exception => exception
-      return false
+      false
     end
 
     private
