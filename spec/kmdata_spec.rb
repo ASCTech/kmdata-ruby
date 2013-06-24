@@ -1,4 +1,5 @@
 require "spec_helper"
+require "rspec/mocks"
 require "kmdata"
 
 describe KMData do
@@ -17,6 +18,13 @@ describe KMData do
   describe 'http' do
     it 'returns a Net::HTTP object' do
       KMData.send(:http).should be_an_instance_of(Net::HTTP)
+    end
+  end
+
+  describe 'get' do
+    it 'returns an array of terms' do
+      KMData.stub!(:process).and_return([OpenStruct.new({ description: 'Foobar' })])
+      KMData.get('terms').first.description.should eq('Foobar')
     end
   end
 end
