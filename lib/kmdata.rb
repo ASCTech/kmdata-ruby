@@ -35,7 +35,7 @@ module KMData
       end
     end
 
-    def path_with_params(path, params)
+    def path_with_params(path, params = {})
       [path, URI.encode_www_form(params)].join("?")
     end
 
