@@ -1,5 +1,6 @@
 require "spec_helper"
 require "kmdata"
+require "pry"
 
 describe KMData do
   describe '.get' do
@@ -15,13 +16,23 @@ describe KMData do
     end
   end
 
+  describe '.process' do
+    let(:data) { [1, 2, { foo: 'bar', baz: true }] }
+    subject { KMData.send :process, data }
+    it 'transforms json' do
+      subject[0].should eql 1
+      subject[2].foo.should eql 'bar'
+      subject[2].baz.should be_true
+    end
+  end
+
   describe '.http' do
-    subject { KMData.instance_eval { http } }
+    subject { KMData.send :http }
     it { should respond_to(:request) }
   end
 
   describe '.request' do
-    subject { KMData.instance_eval { request('/api/terms.json') } }
+    subject { KMData.send :request, '/api/terms.json' }
     before :each do
       response = Net::HTTPResponse.new('', '', '')
       Net::HTTP.any_instance.stub(:request).with(anything).and_return(response)
