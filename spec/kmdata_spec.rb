@@ -5,7 +5,7 @@ describe KMData do
   describe '.get' do
     let(:json) { File.read(File.join('spec', 'fixtures', 'terms.json')) }
 
-    context 'successful' do
+    context 'success' do
       it 'returns an array of terms' do
         response = double()
         response.stub!(:code) { "200" }
@@ -17,7 +17,7 @@ describe KMData do
       end
     end
 
-    context 'unsuccessful' do
+    context 'failure' do
       it 'returns nil' do
         response = double()
         response.stub!(:code) { "500" }
