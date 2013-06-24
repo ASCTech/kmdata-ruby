@@ -31,12 +31,11 @@ module KMData
     # Takes JSON and converts it into a OpenStruct representation. This method
     # is recursive so it's somewhat hard to tell what's going on sometimes...
     def process(json)
-
       # If the current json is an array then we need to loop through each
       # element and process it and add it to the newly created array
 
       if json.is_a? Array
-        result = json.map do |element|
+        json.map do |element|
           process(element)
         end
 
@@ -44,17 +43,14 @@ module KMData
       # looping over each of it's keys and processing the values
 
       elsif json.is_a? Hash
-        json = Hash[json.map{ |key, value| [key,process(value)] }]
-        result = OpenStruct.new(json)
+        OpenStruct.new(Hash[json.map{ |key, value| [key,process(value)] }])
 
       # The current json is some kind of primitive so there's nothing to do in
       # this case so we'll just return it
 
       else
-        result = json
+        json
       end
-
-      result
     end
 
     def path_with_params(path, params)
