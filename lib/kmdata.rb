@@ -11,9 +11,8 @@ module KMData
     def get(path, params = {})
       path = path_with_params("/api/#{path}.json", params)
       response = http.request(Net::HTTP::Get.new(path))
-      process(JSON.parse(response.body))
+      process(JSON.parse(response.body)) if response.code == "200"
     rescue Exception => exception
-      false
     end
 
     private
