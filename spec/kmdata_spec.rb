@@ -2,7 +2,6 @@ require "spec_helper"
 require "kmdata"
 
 describe KMData do
-
   describe 'endpoint' do
     it 'returns the endpoint' do
       KMData::ENDPOINT.should eq('kmdata.osu.edu')
@@ -20,5 +19,4 @@ describe KMData do
       KMData.send(:http).should be_an_instance_of(Net::HTTP)
     end
   end
-
 end
