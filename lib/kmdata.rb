@@ -5,12 +5,16 @@ module KMData
 
   def self.get(path, params = {})
     path = path_with_params("/api/#{path}.json", params)
-    response = http.request(Net::HTTP::Get.new(path))
+    response = fetch(path)
     process(JSON.parse(response.body)) if response.code == "200"
   rescue Exception => exception
   end
 
   private
+
+  def self.fetch(path)
+    http.request(Net::HTTP::Get.new(path))
+  end
 
   def self.http
     @http ||= begin

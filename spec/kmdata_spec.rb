@@ -1,6 +1,6 @@
 require "spec_helper"
-require "rspec/mocks"
 require "kmdata"
+require "pry"
 
 describe KMData do
   describe 'endpoint' do
@@ -23,8 +23,14 @@ describe KMData do
 
   describe 'get' do
     it 'returns an array of terms' do
-      KMData.stub!(:process).and_return([OpenStruct.new({ description: 'Foobar' })])
-      KMData.get('terms').first.description.should eq('Foobar')
+      json = File.read(File.join('spec', 'fixtures', 'terms.json'))
+      response = double()
+      response.stub!(:code) { "200" }
+      response.stub!(:body) { json }
+
+      KMData.stub!(:path_with_params).with("/api/terms.json", {})
+      KMData.stub!(:fetch).with(anything).and_return(response)
+      KMData.get('terms').should == KMData.send(:process, JSON.parse(json))
     end
   end
 end
