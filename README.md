@@ -23,10 +23,9 @@ Or install it yourself as:
       puts term.description
     end
 
-    people = KMData.get('people', { q: 'Decot' })
-    people.each do |person|
-      puts person.display_name
-    end
+    resource_id = KMData.get('people', { q: 'Decot' }).first.resource_id
+    person = KMData.get("people/#{resource_id}")
+    puts person.display_name
 
 ## Contributing
 
