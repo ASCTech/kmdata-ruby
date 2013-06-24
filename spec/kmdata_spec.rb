@@ -5,7 +5,7 @@ describe KMData do
 
   describe 'endpoint' do
     it 'returns the endpoint' do
-      KMData.endpoint.should eq('kmdata.osu.edu')
+      KMData::ENDPOINT.should eq('kmdata.osu.edu')
     end
   end
 

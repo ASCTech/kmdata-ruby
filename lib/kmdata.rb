@@ -4,11 +4,9 @@ require "json"
 require "ostruct"
 
 module KMData
-  class << self
+  ENDPOINT = "kmdata.osu.edu"
 
-    def endpoint
-      "kmdata.osu.edu"
-    end
+  class << self
 
     def get(path, params = {})
       path = path_with_params("/api/#{path}.json", params)
@@ -22,7 +20,7 @@ module KMData
 
     def http
       @http ||= begin
-        http = Net::HTTP.new(endpoint, 443)
+        http = Net::HTTP.new(ENDPOINT, 443)
         http.use_ssl = true
         http
       end
