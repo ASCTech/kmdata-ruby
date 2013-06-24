@@ -1,6 +1,5 @@
 require "spec_helper"
 require "kmdata"
-require "pry"
 
 describe KMData do
   describe 'endpoint' do
