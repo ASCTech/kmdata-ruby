@@ -2,18 +2,6 @@ require "spec_helper"
 require "kmdata"
 
 describe KMData do
-  describe '.endpoint' do
-    subject { KMData::ENDPOINT }
-    it { should eq "kmdata.osu.edu" }
-  end
-
-  describe '.path_with_params' do
-    subject { KMData.send(:path_with_params, 'people', { last_name: "Decot", first_name: "Kyle" }) }
-    it 'appends the params to the path' do
-      should eq('people?last_name=Decot&first_name=Kyle')
-    end
-  end
-
   describe '.http' do
     subject { KMData.send(:http) }
     it { should respond_to(:request) }
