@@ -21,6 +21,14 @@ describe KMData do
     end
   end
 
+  describe 'http' do
+    it 'returns a Net::HTTP object' do
+      response = Net::HTTPResponse.new '', '', ''
+      Net::HTTP.any_instance.stub(:request).with(anything).and_return(response)
+      KMData.send(:fetch, '/api/terms.json').should be_an_instance_of(response.class)
+    end
+  end
+
   describe 'get' do
     it 'returns an array of terms' do
       json = File.read(File.join('spec', 'fixtures', 'terms.json'))
