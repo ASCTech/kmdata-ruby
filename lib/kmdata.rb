@@ -11,13 +11,11 @@ module KMData
     end
 
     def get(path, params = {})
-      begin
-        path = path_with_params("/api/#{path}.json", params)
-        response = http.request(Net::HTTP::Get.new(path))
-        process(JSON.parse(response.body))
-      rescue Exception => exception
-        return false
-      end
+      path = path_with_params("/api/#{path}.json", params)
+      response = http.request(Net::HTTP::Get.new(path))
+      process(JSON.parse(response.body))
+    rescue Exception => exception
+      return false
     end
 
     private
