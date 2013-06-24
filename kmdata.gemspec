@@ -6,11 +6,11 @@ require 'kmdata/version'
 Gem::Specification.new do |spec|
   spec.name          = "kmdata"
   spec.version       = KMData::VERSION
-  spec.authors       = ["Kyle Decot"]
-  spec.email         = ["kyle.decot@me.com"]
-  spec.description   = %q{wrapper for KMData API}
-  spec.summary       = %q{Wrapper forthe KMData API}
-  spec.homepage      = ""
+  spec.authors       = ["Kyle Decot", "Mike Butsko", "Ryan Stocker"]
+  spec.email         = ["decot.7@osu.edu", "butsko.7@osu.edu", "stocker.19@osu.edu"]
+  spec.description   = %q{A simple API wrapper for interacting with the KMData Project}
+  spec.summary       = %q{A simple API wrapper for interacting with the KMData Project}
+  spec.homepage      = "https://github.com/ASCTech/kmdata-ruby"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -22,7 +22,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake"
 
   spec.add_runtime_dependency "json"
-  # spec.add_runtime_dependency "net/http"
-  # spec.add_runtime_dependency "ostruct"
-
 end

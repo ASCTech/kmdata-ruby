@@ -1,6 +1,6 @@
 # KMData
 
-TODO: Write a gem description
+A simple API wrapper for interacting with the [KMData](https://kmdata.osu.edu/) Project.
 
 ## Installation
 
@@ -18,7 +18,11 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+    terms = KMData.get('terms')
+
+    terms.each do |term|
+      puts term.description
+    end
 
 ## Contributing
 
