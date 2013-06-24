@@ -4,15 +4,15 @@ module KMData
   ENDPOINT = "kmdata.osu.edu"
 
   def self.get(path, params = {})
-    path = path_with_params("/api/#{path}.json", params)
-    response = fetch(path)
+    path = "/api/#{path}.json?#{URI.encode_www_form(params)}"
+    response = request(path)
     process(JSON.parse(response.body)) if response.code == "200"
   rescue Exception => exception
   end
 
   private
 
-  def self.fetch(path)
+  def self.request(path)
     http.request(Net::HTTP::Get.new(path))
   end
 
@@ -32,9 +32,5 @@ module KMData
     else
       json
     end
-  end
-
-  def self.path_with_params(path, params = {})
-    [path, URI.encode_www_form(params)].join("?")
   end
 end
