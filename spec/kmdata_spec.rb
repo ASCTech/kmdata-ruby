@@ -48,12 +48,19 @@ describe KMData do
   end
 
   describe '.request' do
-    subject { KMData.send :request, '/api/terms.json' }
-    before :each do
-      response = Net::HTTPResponse.new('', '', '')
-      Net::HTTP.any_instance.stub(:request).with(anything).and_return(response)
+    let(:response) do
+      response = double()
+      response.stub!(:body).and_return('')
+      response.stub!(:code).and_return('200')
+      response
     end
-    it { should respond_to(:body) }
-    it { should respond_to(:code) }
+    subject { KMData.send(:request, '/api/terms.json') }
+    it 'should respond to body and code' do
+      http = double()
+      http.stub!(:request).and_return(response)
+      KMData.stub!(:http).and_return(http)
+
+      subject.should respond_to(:body, :code)
+    end
   end
 end
