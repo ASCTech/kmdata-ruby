@@ -1,11 +1,7 @@
-require "kmdata/version"
-require "net/http"
-require "json"
-require "ostruct"
+["kmdata/version", "net/http", "json", "ostruct"].each { |f| require f }
 
 module KMData
   ENDPOINT = "kmdata.osu.edu"
-
   class << self
 
     def get(path, params = {})
@@ -38,6 +34,5 @@ module KMData
     def path_with_params(path, params = {})
       [path, URI.encode_www_form(params)].join("?")
     end
-
   end
 end
