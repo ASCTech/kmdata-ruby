@@ -1,4 +1,4 @@
-["kmdata/version", "net/http", "json", "ostruct"].each { |f| require f }
+%w[kmdata/version net/http json ostruct].each { |f| require f }
 
 module KMData
   ENDPOINT = "kmdata.osu.edu"
