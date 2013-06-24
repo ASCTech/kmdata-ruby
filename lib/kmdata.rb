@@ -3,7 +3,6 @@
 module KMData
   ENDPOINT = "kmdata.osu.edu"
   class << self
-
     def get(path, params = {})
       path = path_with_params("/api/#{path}.json", params)
       response = http.request(Net::HTTP::Get.new(path))
