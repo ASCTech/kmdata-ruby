@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "kmdata"
   spec.version       = KMData::VERSION
   spec.authors       = ["Kyle Decot"]
-  spec.email         = ["kyle.decot@icloud.com"]
+  spec.email         = ["decot.7@osu.edu"]
   spec.description   = %q{A simple API wrapper for interacting with the KMData Project}
   spec.summary       = %q{A simple API wrapper for interacting with the KMData Project}
   spec.homepage      = ""
@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
 
   spec.add_runtime_dependency "json"
   spec.add_runtime_dependency "recursive-open-struct"

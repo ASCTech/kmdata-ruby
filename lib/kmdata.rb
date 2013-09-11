@@ -3,6 +3,7 @@ require 'net/http'
 require 'json'
 require 'ostruct'
 require 'recursive-open-struct'
+require 'pp'
 
 module KMData
   class << self
@@ -19,15 +20,21 @@ module KMData
     #
     def get(path, params = {})
       path = path_with_params("/api/#{path}.json", params)
+
+      pp path
+
       response = http.request(Net::HTTP::Get.new(path))
 
-      json = JSON.parse(response.body)
+      if response.body
+        json = JSON.parse(response.body)
 
-      if json.is_a? Array
-        json.map do |j|
-          RecursiveOpenStruct.new(j, recurse_over_arrays: true)
+        if json.is_a? Array
+          json.map do |j|
+            RecursiveOpenStruct.new(j, recurse_over_arrays: true)
+          end
+        else
+          RecursiveOpenStruct.new(json, recurse_over_arrays: true)
         end
-      else
       end
     end
 
