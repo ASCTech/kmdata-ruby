@@ -5,8 +5,10 @@ require 'optparse'
 require 'pry'
 require 'yaml'
 
-options = { model: "people", include: "addresses,phone_numbers" }
-
+options = {
+  model: "people",
+  include: "addresses,phone_numbers,appointments"
+}
 
 OptionParser.new do |opts|
   opts.banner = "Usage: kmdata [query] [options]"
