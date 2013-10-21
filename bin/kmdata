@@ -4,7 +4,8 @@ require 'kmdata'
 require 'optparse'
 require 'pry'
 
-options = { model: 'people' }
+options = { model: "people", include: "addresses,phone_numbers" }
+
 
 OptionParser.new do |opts|
   opts.banner = "Usage: kmdata [query] [options]"
@@ -12,10 +13,14 @@ OptionParser.new do |opts|
   opts.on("-m", "--model [MODEL]") do |m|
     options[:model] = m
   end
+
+  opts.on("-i", "--include [INCLUDE]") do |m|
+    options[:model] = m
+  end
 end.parse!
 
 if ARGV[0]
-  results = KMData.get(options[:model], q: ARGV[0])
+  results = KMData.get(options[:model], q: ARGV[0], include: options[:include])
 
   if results.any?
     results.each do |object|
