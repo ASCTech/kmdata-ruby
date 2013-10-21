@@ -1,23 +1,16 @@
 require "kmdata/version"
-require 'net/http'
-require 'json'
-require 'ostruct'
-require 'recursive-open-struct'
-require 'pp'
+require "net/http"
+require "json"
+require "ostruct"
+require "recursive-open-struct"
 
 module KMData
   class << self
 
-    #
-    #
-    #
     def endpoint
       "kmdata.osu.edu"
     end
 
-    #
-    #
-    #
     def get(path, params = {})
       path = path_with_params("/api/#{path}.json", params)
 
@@ -36,9 +29,6 @@ module KMData
       end
     end
 
-    #
-    #
-    #
     def http
       @http ||= begin
         http = Net::HTTP.new(endpoint, 443)
@@ -49,12 +39,9 @@ module KMData
 
     protected
 
-    #
-    #
-    #
     def path_with_params(path, params)
       encoded_params = URI.encode_www_form(params)
-      [path, encoded_params].join('?')
+      [path, encoded_params].join("?")
     end
   end
 end

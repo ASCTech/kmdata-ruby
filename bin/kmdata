@@ -6,8 +6,10 @@ person = KMData.get("people", q: ARGV[0])
 
 if person.any?
   person.each do |p|
+    puts "\n"
     p.to_h.each do |k, v|
       puts "#{k}: #{v}"
     end
   end
+  puts "\n"
 end
