@@ -3,6 +3,7 @@
 require 'kmdata'
 require 'optparse'
 require 'pry'
+require 'yaml'
 
 options = { model: "people", include: "addresses,phone_numbers" }
 
@@ -21,14 +22,7 @@ end.parse!
 
 if ARGV[0]
   results = KMData.get(options[:model], q: ARGV[0], include: options[:include])
-
-  if results.any?
-    results.each do |object|
-      puts "\n"
-      object.to_h.each do |k, v|
-        puts "#{k}: #{v}"
-      end
-    end
-    puts "\n"
+  results.map do |r|
+    puts r.to_h.to_yaml if results.any?
   end
 end
