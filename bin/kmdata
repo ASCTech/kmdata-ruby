@@ -1,15 +1,29 @@
 #!/usr/bin/env ruby
 
 require 'kmdata'
+require 'optparse'
 require 'pry'
-person = KMData.get("people", q: ARGV[0])
 
-if person.any?
-  person.each do |p|
-    puts "\n"
-    p.to_h.each do |k, v|
-      puts "#{k}: #{v}"
-    end
+options = { model: 'people' }
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: kmdata [query] [options]"
+
+  opts.on("-m", "--model [MODEL]") do |m|
+    options[:model] = m
   end
-  puts "\n"
+end.parse!
+
+if ARGV[0]
+  results = KMData.get(options[:model], q: ARGV[0])
+
+  if results.any?
+    results.each do |object|
+      puts "\n"
+      object.to_h.each do |k, v|
+        puts "#{k}: #{v}"
+      end
+    end
+    puts "\n"
+  end
 end
