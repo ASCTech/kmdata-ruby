@@ -21,8 +21,6 @@ module KMData
     def get(path, params = {})
       path = path_with_params("/api/#{path}.json", params)
 
-      pp path
-
       response = http.request(Net::HTTP::Get.new(path))
 
       if response.body

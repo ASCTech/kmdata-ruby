@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+require 'kmdata'
+require 'pry'
+person = KMData.get("people", q: ARGV[0])
+
+if person.any?
+  person.each do |p|
+    p.to_h.each do |k, v|
+      puts "#{k}: #{v}"
+    end
+  end
+end
