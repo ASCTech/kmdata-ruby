@@ -11,22 +11,30 @@ module KMData
       "kmdata.osu.edu"
     end
 
-    def get(path, params = {})
-      path = path_with_params("/api/#{path}.json", params)
+    def get(endpoint, params = {})
 
-      response = http.request(Net::HTTP::Get.new(path))
+      json_results = []
 
-      if response.body
-        json = JSON.parse(response.body)
+      1.step(by: 1) do |n|
+        params[:page] = n
+        path = path_with_params("/api/#{endpoint}.json", params)
+        response = http.request(Net::HTTP::Get.new(path))
 
-        if json.is_a? Array
-          json.map do |j|
-            RecursiveOpenStruct.new(j, recurse_over_arrays: true)
+        if response.body
+          json = JSON.parse(response.body)
+          break if json.empty?
+
+          if json.is_a? Array
+            json.map do |j|
+              json_results << RecursiveOpenStruct.new(j, recurse_over_arrays: true)
+            end
+          else
+            json_results << RecursiveOpenStruct.new(json, recurse_over_arrays: true)
           end
-        else
-          RecursiveOpenStruct.new(json, recurse_over_arrays: true)
         end
+
       end
+      json_results.size == 1 ? json_results.first : json_results
     end
 
     def http
